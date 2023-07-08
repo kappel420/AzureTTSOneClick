@@ -119,17 +119,13 @@
     }
   ],
   "outputs": {
-    "cognitivekeys": {
-      "type": "object",
-      "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview')]"
-    },
-    "cognitivekey1": {
+    "AZURE_API_KEY": {
       "type": "string",
       "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview').key1]"
     },
-    "cognitivekey2": {
+    "AZURETTS_CONF[region]": {
       "type": "string",
-      "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview').key2]"
+      "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview').region]"
     }
 }
 }
