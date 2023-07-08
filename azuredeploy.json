@@ -119,11 +119,11 @@
     }
   ],
   "outputs": {
-    "AZURE_API_KEY": {
+    "Azure_API_KEY": {
       "type": "string",
       "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview').key1]"
     },
-    "AZURETTS_CONF[region]": {
+    "AzureTTS_CONF[region]": {
       "type": "string",
       "value": "[resourceGroup().location]"
     }
