@@ -125,7 +125,7 @@
     },
     "AZURETTS_CONF[region]": {
       "type": "string",
-      "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview').region]"
+      "value": "[reference(variables('cognitiveservicesid'),'2016-02-01-preview').region]"
     }
 }
 }
