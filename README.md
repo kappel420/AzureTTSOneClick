@@ -1,2 +1,2 @@
 # AzureTTSOneClick
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fhttps://raw.githubusercontent.com/kappel420/AzureTTSOneClick/main/azuredeploy.json?token=GHSAT0AAAAAACDR7IJIF3ULBA4IM6GPTWEIZFJIYIQ)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fhttps://raw.githubusercontent.com/kappel420/AzureTTSOneClick/main/azuredeploy.json)
