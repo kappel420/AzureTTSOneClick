@@ -125,7 +125,7 @@
     },
     "AZURETTS_CONF[region]": {
       "type": "string",
-      "value": "[reference(variables('cognitiveservicesid'),'2016-02-01-preview').region]"
+      "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', variables('cognitiveservicesid')), '2016-02-01-preview').location]"
     }
 }
 }
