@@ -1,1 +1,2 @@
 # AzureTTSOneClick
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://raw.githubusercontent.com/kappel420/AzureTTSOneClick/main/azuredeploy.json?token=GHSAT0AAAAAACDR7IJIF3ULBA4IM6GPTWEIZFJIYIQ)
