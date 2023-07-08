@@ -4,9 +4,9 @@
   "parameters": {
     "cognitiveServiceName": {
       "type": "string",
-      "defaultValue": "[format('CognitiveService-{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[format('AzureTTS-{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
-        "description": "That name is the name of our application. It has to be unique.Type a name followed by your resource group name. (<name>-<resourceGroupName>)"
+        "description": "That name is the name of our application. It has to be unique.)"
       }
     },
     "sku": {
