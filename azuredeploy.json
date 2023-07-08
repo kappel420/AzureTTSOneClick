@@ -1,0 +1,142 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cognitiveServiceName": {
+      "type": "string",
+      "defaultValue": "[format('CognitiveService-{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "That name is the name of our application. It has to be unique.Type a name followed by your resource group name. (<name>-<resourceGroupName>)"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "S0",
+      "allowedValues": [
+        "S0"
+      ]
+    },
+    "amount": {
+      "type": "int",
+      "defaultValue": 5,
+      "metadata": {
+        "description": "The total amount of cost or usage to track with the budget ($5+ per week for heavy usage)"
+      }
+    },
+    "timeGrain": {
+      "type": "string",
+      "defaultValue": "Monthly",
+      "allowedValues": [
+        "Monthly",
+        "Quarterly",
+        "Annually"
+      ],
+      "metadata": {
+        "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain."
+      }
+    },
+    "startDate": {
+      "type": "string",
+      "metadata": {
+        "description": "The start date must be first of the month in YYYY-MM-DD format. Future start date should not be more than three months. Past start date should be selected within the timegrain preiod."
+      }
+    },
+    "endDate": {
+      "type": "string",
+      "metadata": {
+        "description": "The end date for the budget in YYYY-MM-DD format. If not provided, we default this to 10 years from the start date."
+      }
+    },
+    "firstThreshold": {
+      "type": "int",
+      "defaultValue": 500,
+      "metadata": {
+        "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0.01 and 1000."
+      }
+    },
+    "secondThreshold": {
+      "type": "int",
+      "defaultValue": 900,
+      "metadata": {
+        "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0.01 and 1000."
+      }
+    },
+    "contactEmails": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of email addresses to send the budget notification to when the threshold is exceeded."
+      }
+    }
+  },
+    "variables": {
+    "name":  "Test",
+    "cognitiveservicesid": "[concat(resourceGroup().id,'/providers/','Microsoft.CognitiveServices/accounts/', variables('name'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.CognitiveServices/accounts",
+      "apiVersion": "2021-10-01",
+      "name": "[parameters('cognitiveServiceName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      },
+      "kind": "SpeechServices",
+      "properties": {
+        "apiProperties": {
+          "statisticsEnabled": false
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Consumption/budgets",
+      "apiVersion": "2021-10-01",
+      "name": "[parameters('cognitiveServiceName')]",
+      "properties": {
+        "timePeriod": {
+          "startDate": "[parameters('startDate')]",
+          "endDate": "[parameters('endDate')]"
+        },
+        "timeGrain": "[parameters('timeGrain')]",
+        "amount": "[parameters('amount')]",
+        "category": "Cost",
+        "notifications": {
+          "NotificationForExceededBudget1": {
+            "enabled": true,
+            "operator": "GreaterThan",
+            "threshold": "[parameters('firstThreshold')]",
+            "contactEmails": "[parameters('contactEmails')]"
+          },
+          "NotificationForExceededBudget2": {
+            "enabled": true,
+            "operator": "GreaterThan",
+            "threshold": "[parameters('secondThreshold')]",
+            "contactEmails": "[parameters('contactEmails')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "cognitivekeys": {
+      "type": "object",
+      "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview')]"
+    },
+    "cognitivekey1": {
+      "type": "string",
+      "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview').key1]"
+    },
+    "cognitivekey2": {
+      "type": "string",
+      "value": "[listKeys(variables('cognitiveservicesid'),'2016-02-01-preview').key2]"
+    }
+}
+}
+  
