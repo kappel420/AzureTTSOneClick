@@ -70,7 +70,7 @@
     }
   },
     "variables": {
-    "name":  "Test",
+    "name":  "[parameters('cognitiveServiceName')]",
     "cognitiveservicesid": "[concat(resourceGroup().id,'/providers/','Microsoft.CognitiveServices/accounts/', variables('name'))]"
   },
   "resources": [
